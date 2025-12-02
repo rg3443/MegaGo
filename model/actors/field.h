@@ -16,7 +16,7 @@ namespace Model {
     Q_OBJECT
     private:
         QVector<QVector<Tile*>> tileMatrix;
-        QVector<Allience> vAlliences;
+        QVector<Allience*> ldAlliences;
 
         uint64_t sizeX, sizeY;
         uint8_t type;

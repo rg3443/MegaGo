@@ -6,7 +6,7 @@ namespace MegaGo {
 namespace Model {
     static bool IsDebuging_;
 
-    static const uint64_t gNullPos_;
+    static const uint64_t gNullPos_ = 9999;
     struct Pos2d {
         uint64_t x, y;
 

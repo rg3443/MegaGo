@@ -9,14 +9,14 @@ namespace Model {
     class ModelObject : public QObject {
         Q_OBJECT
     private:
-        unsigned long long int internalId;
-        static unsigned long long int internalIdCounter;
+        uint64_t internalId;
+        static uint64_t internalIdCounter;
     public:
         ModelObject(QObject * parent = nullptr);
         ~ModelObject();
 
         void SetId(unsigned long long int id);
-        unsigned long long int GetId();
+        uint64_t GetId();
 
         void Log(QString str);
 

@@ -44,6 +44,9 @@ set(PROJECT_SOURCES
         model/gameloop/gamemode.cpp
         model/gameloop/team.h
         model/gameloop/team.cpp
+
+        model/accounts/clientaccount.h
+        model/accounts/clientaccount.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

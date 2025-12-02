@@ -8,7 +8,7 @@ namespace Model {
     class Allience : public ModelObject {
     Q_OBJECT
     private:
-        QVector<Tile*> vTokens;
+        QVector<Tile*> lTokens;
         uint64_t breathePoints;
     public:
         Allience(Tile* firstTile, uint64_t breathePoints_, QObject * parent = nullptr);
