@@ -10,7 +10,7 @@ namespace Model {
     Q_OBJECT
     private:
         Pos2d position;
-
+        uint64_t playerId;
     public:
         Token(uint64_t posX, uint64_t posY, QObject * parent = nullptr);
         ~Token();

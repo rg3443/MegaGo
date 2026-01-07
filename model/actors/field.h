@@ -26,6 +26,9 @@ namespace Model {
 
         Tile*                      GetTile(uint64_t posX_, uint64_t posY_);
         QVector<QVector<Tile*>>*   GetTileMatrix();
+        
+        // in-game methods
+        bool PlaceToken();
     private:
         void _InitTileMatrix();
 

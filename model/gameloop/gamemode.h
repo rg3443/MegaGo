@@ -18,14 +18,18 @@ namespace Model {
         Field * field;
         QVector<Team*> ldTeams;
     public:
-        GameMode(int fieldSizeX,int fieldSizeY,int teamAmmount, uint16_t teamSize, QObject * parent = nullptr);
+        GameMode(QObject * parent = nullptr);
         ~GameMode();
 
 
-        void Init(int fieldSizeX,int fieldSizeY,int teamAmmount, uint16_t maxPlayerInTeam);
+        void InitRoom(int fieldSizeX,int fieldSizeY,int teamAmmount, uint16_t maxPlayerInTeam);
         void AssignClientToTeam(ClientAccount * client, int16_t teamId);
 
         void TurnOn(int16_t firstTurnTeamId = 0);
+        
+        // in-play methods
+        bool PlaceToken(Player* player, Pos2d pos);
+        bool PassTurn(Player* player);
 
        // bool ApplyTurn();
 
