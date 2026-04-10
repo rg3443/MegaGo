@@ -7,7 +7,12 @@ namespace MegaGo {
 namespace Model {
     class ClientAccount : public ModelObject {
     private:
-        QString login;
+        QString
+        login,
+        password,
+        nickname;
+
+
 
     public:
         ClientAccount() { login = "test_login"; }
