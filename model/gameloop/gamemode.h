@@ -7,12 +7,19 @@
 
 namespace MegaGo {
 namespace Model {
+    struct GameModeSettings {
+        int32_t maxSlotsInTeam;
+        int32_t teamsAmmount;
+        Pos2d fieldSize;
+
+        GameModeSettings() {}
+    };
+
     class GameMode : public ModelObject {
     Q_OBJECT
     private:
         // rules
-        uint16_t maxPlayersInTeam;
-
+        GameModeSettings settings;
         // data
         uint8_t currentTeamTurnIndex;
         Field * field;
@@ -25,17 +32,18 @@ namespace Model {
         void InitRoom(int fieldSizeX,int fieldSizeY,int teamAmmount, uint16_t maxPlayerInTeam);
         void AssignClientToTeam(ClientAccount * client, int16_t teamId);
 
-        void TurnOn(int16_t firstTurnTeamId = 0);
         
         // in-play methods
+        void TurnOn(int16_t firstTurnTeamId = 0);
         bool PlaceToken(Player* player, Pos2d pos);
         bool PassTurn(Player* player);
 
-       // bool ApplyTurn();
-
+        // pointer getters
+        Field * GetField_P() { return field; }
+        GameModeSettings * GetSettings_P() { return &settings; }
+        QVector<Team*> GetTeamList_P() { return ldTeams; }
+        // static getters
         uint8_t GetCurrentTeamTurnIndex() { return currentTeamTurnIndex; }
-        Field * GetField() { return field; }
-        QVector<Team*> GetTeams() { return ldTeams; }
     };
 }
 }

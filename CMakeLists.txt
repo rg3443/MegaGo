@@ -47,6 +47,9 @@ set(PROJECT_SOURCES
 
         model/accounts/clientaccount.h
         model/accounts/clientaccount.cpp
+
+        model/server/room.h
+        model/server/room.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

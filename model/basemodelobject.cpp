@@ -23,6 +23,6 @@ unsigned long long int ModelObject::GetId() { return internalId; }
 
 void ModelObject::Log(QString str)
 {
-    qDebug() << str;
+    qDebug() << "ObjectId#" << internalId << ":" << str;
 }
 

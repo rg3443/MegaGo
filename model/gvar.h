@@ -10,7 +10,7 @@ namespace Model {
     struct Pos2d {
         uint64_t x, y;
 
-        Pos2d(uint64_t posX_, uint64_t posY_) {
+        Pos2d(uint64_t posX_ = 0, uint64_t posY_ = 0) {
             Set(posX_,posY_);
         }
         void Set(uint64_t posX_, uint64_t posY_) {

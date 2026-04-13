@@ -16,11 +16,15 @@ GameMode::~GameMode()
 
 void GameMode::InitRoom(int fieldSizeX, int fieldSizeY, int teamAmmount, uint16_t maxPlayersInTeam_)
 {
-    maxPlayersInTeam = maxPlayersInTeam_;
-    field = new Field(fieldSizeX,fieldSizeY,ID_FIELD_CLASSIC,this);
-    for(int i=0;i<teamAmmount;i++) {
+    settings.maxSlotsInTeam = maxPlayersInTeam_;
+    settings.teamsAmmount = teamAmmount;
+    settings.fieldSize.Set(fieldSizeX,fieldSizeY);
+
+
+    field = new Field(settings.fieldSize.x,settings.fieldSize.y,ID_FIELD_CLASSIC,this);
+    for(int i=0;i<settings.teamsAmmount;i++) {
         ldTeams.append(new Team(this));
-        ldTeams.last()->SetMaxPlayers(maxPlayersInTeam);
+        ldTeams.last()->SetMaxPlayers(settings.maxSlotsInTeam);
     }
 }
 
