@@ -22,7 +22,7 @@ void Team::AssignClient(QString login)
 {
     if(ldPlayers.size() < maxPlayersAmmount) {
         ldPlayers.push_back(new Player(this));
-        ldPlayers.last()->AssignClientLogin(login);
+        ldPlayers.last()->AssignClient(login);
     } else
         Log("Too much players in team: can't assign new client");
 }

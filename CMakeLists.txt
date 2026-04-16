@@ -50,6 +50,9 @@ set(PROJECT_SOURCES
 
         model/server/room.h
         model/server/room.cpp
+
+        utils/glossar/glossar.h
+        utils/glossar/glossar.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

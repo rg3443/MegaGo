@@ -13,3 +13,13 @@ Allience::~Allience()
 {
     if(IsDebuging_) Log("It is allience");
 }
+
+QVector<Tile*> & Allience::GetTokens()
+{
+    return lTokens;
+}
+
+uint64_t Allience::GetBreathe()
+{
+    return breathePoints;
+}

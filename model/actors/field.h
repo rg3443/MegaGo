@@ -27,11 +27,30 @@ namespace Model {
         Tile*                      GetTile(uint64_t posX_, uint64_t posY_);
         QVector<QVector<Tile*>>*   GetTileMatrix();
         
-        // in-game methods
-        bool PlaceToken();
+        // // in-game methods
+        // place token
+        bool PlaceToken(Token * token, Pos2d pos);
+        // unplace token byt token
+        bool UnplaceToken(Token* token);
+        // unplace token by coordinates
+        bool ClearTile(Pos2d pos);
+        // check if allience is alive
+        bool CheckAllianceLifeness(Allience* allience);
+        // unplace all allience-related tokens
+        bool ClearAllience(Allience* allience);
+
+        // // analyse methods
+        // get closest allience to position
+        Allience* GetClosestAllience(Pos2d pos);
+        // recalculate all alliences breathe points
+        void RecalcAlliencesBreathe();
     private:
         void _InitTileMatrix();
+        // check if alliences broke or combined
+        void _CheckAlliencesStructure();
 
+        //
+        bool _PosIsValid(Pos2d pos);
     };
 
 }

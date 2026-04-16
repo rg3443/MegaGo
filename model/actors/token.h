@@ -15,7 +15,11 @@ namespace Model {
         Token(uint64_t posX, uint64_t posY, QObject * parent = nullptr);
         ~Token();
 
+        void SetPlayerId(uint64_t id) { playerId = id; }
+
         void SetPos(uint64_t posX_, uint64_t posY_);
+        void SetPos(Pos2d pos) { position = pos; }
+        void SetPos(Pos2d * pos) { if(pos!=nullptr) position = *pos; }
 
         Pos2d* GetPos();
 

@@ -19,19 +19,21 @@ namespace Model {
         QString name;
         uint8_t iconId;
         QVector<Token*> ldTokens;
-        QString clientLogin;
+        uint64_t clientId;
     public:
         Player(QObject * parent = nullptr);
         ~Player();
 
         void Customise(QString newName, uint8_t newIconId = ID_PLAYER_NONE);
-        void AssignClientLogin(QString login);
+        void AssignClient(uint64_t clientId_);
+        Token* CreateToken();
+        bool DeleteToken(Token * token);
 
         // getters
         QString GetName() { return name; }
         uint8_t GetIconId() { return iconId; }
-        QVector<Token*>* GetTokens() { return &ldTokens; }
-        QString GetClientLogin() { return clientLogin; }
+        QVector<Token*> GetTokens() { return ldTokens; }
+        uint64_t GetClientId() { return clientId; }
     };
 }
 }

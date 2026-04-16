@@ -36,7 +36,7 @@ namespace Model {
         // // static
         int64_t GetHostId() { return hostClientId; }
         QVector<int64_t> GetPlayersIds() { return playersClientId; }
-        int64_t GetGameloopId() { return gameLoopId; }
+        int64_t GetGameloopId() { return gameloopId; }
         // // pointer
         RoomSettings * GetSettings() { return &settings; }
     };
