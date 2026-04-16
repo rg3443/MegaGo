@@ -22,9 +22,13 @@ namespace Model {
     public:
         Team(QObject * parent = nullptr);
         ~Team();
-        // setters
+
+        // set maximum player ammount in team
         void SetMaxPlayers(uint16_t maxAmmount);
-        void AssignClient(QString login);
+        // create player and assign client to it
+        void AssignClient(uint64_t clientId);
+        // delete player object via clientId
+        bool DeletePlayer(uint64_t clientId);
 
         // turn
         Player* GetCurrentTurnPlayer();
@@ -32,8 +36,8 @@ namespace Model {
 
         // getters
         uint16_t GetMaxPlayers() { return maxPlayersAmmount; }
-        Player* GetPlayer(uint16_t internalId);
-        Player* GetPlayer(QString login);
+        Player* GetPlayer(uint64_t clientId);
+        Player* GetPlayer(unsigned long int playerId);
     };
 }
 }
