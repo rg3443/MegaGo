@@ -30,11 +30,11 @@ namespace Model {
 
 
         void InitRoom(int fieldSizeX,int fieldSizeY,int teamAmmount, uint16_t maxPlayerInTeam);
-        void AssignClientToTeam(ClientAccount * client, int16_t teamId);
+        bool AssignClientToTeam(ClientAccount * client, uint64_t teamId);
 
         
         // in-play methods
-        void TurnOn(int16_t firstTurnTeamId = 0);
+        bool TurnOn(uint64_t firstTurnTeamId = 0);
         bool PlaceToken(Player* player, Pos2d pos);
         bool PassTurn(Player* player);
 
@@ -44,6 +44,10 @@ namespace Model {
         QVector<Team*> GetTeamList_P() { return ldTeams; }
         // static getters
         uint8_t GetCurrentTeamTurnIndex() { return currentTeamTurnIndex; }
+        uint64_t GetCurrentPlayerTurnId();
+        
+    private:
+        void _CycleTurnIndex();
     };
 }
 }

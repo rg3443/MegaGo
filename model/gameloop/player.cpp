@@ -11,6 +11,11 @@ Player::Player(QObject * parent)
 Player::~Player()
 {
     if(IsDebuging_) Log("It is player");
+    
+    for(int tokid=0;tokid<ldTokens.size();tokid++) {
+        delete ldTokens[tokid];
+    }
+    ldTokens.clear();
 }
 
 void Player::Customise(QString newName, uint8_t newIconId)
