@@ -49,8 +49,12 @@ bool Team::TurnMade(uint64_t playerId)
 {
     bool found = false;
     for(int i=0;i<ldPlayers.size();i++) {
-        if(ldPlayers[i]->GetId() == playerId)
-            found = true;
+        if(ldPlayers[i]->GetId() == playerId) {
+            if(i == ldPlayers.size()-1)
+                currentPlayerTurnIndex = 0;
+            else
+                currentPlayerTurnIndex = ldPlayers[i+1];
+        }
     }
     if(found) currentPlayerTurnIndex++;
     return found;
