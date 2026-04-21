@@ -14,6 +14,15 @@ Allience::~Allience()
     if(IsDebuging_) Log("It is allience");
 }
 
+bool Allience::PosIsNearby(Pos2d pos)
+{
+    for(int tokid=0;tokid<lTokens.size();tokid++) {
+        if(lTokens[tokid]->GetPos()->CalcDistance(pos) == 1) 
+            return true;
+    }
+    return false;
+}
+
 QVector<Tile*> & Allience::GetTokens()
 {
     return lTokens;

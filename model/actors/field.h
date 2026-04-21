@@ -36,12 +36,14 @@ namespace Model {
         bool ClearTile(Pos2d pos);
         // check if allience is alive
         bool CheckAllianceLifeness(Allience* allience);
+        // check if token is alive
+        bool CheckTokenLifenessByTile(Tile* tile); 
         // unplace all allience-related tokens
         bool ClearAllience(Allience* allience);
 
         // // analyse methods
         // get closest allience to position
-        Allience* GetClosestAllience(Pos2d pos);
+        Allience* CheckAllienceCloseBy(Pos2d pos,uint64_t playerId);
         // recalculate all alliences breathe points
         void RecalcAlliencesBreathe();
     private:

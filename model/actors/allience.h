@@ -15,6 +15,8 @@ namespace Model {
         ~Allience();
 
         void SetBreathe(uint64_t breathePoints_);
+        
+        bool PosIsNearby(Pos2d pos);
 
         QVector<Tile*>& GetTokens();
         uint64_t        GetBreathe();

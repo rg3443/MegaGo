@@ -22,9 +22,8 @@ namespace Model {
         void SetPos(Pos2d * pos) { if(pos!=nullptr) position = *pos; }
 
         Pos2d* GetPos();
-
     };
-
+    
 }
 }
 

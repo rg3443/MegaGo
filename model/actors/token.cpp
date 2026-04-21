@@ -11,6 +11,9 @@ Token::~Token()
     if(IsDebuging_) Log("It is token");
 }
 
-void Token::SetPos(uint64_t posX_, uint64_t posY_) { position.Set(posX_,posY_); }
+void Token::SetPos(uint64_t posX_, uint64_t posY_) 
+{ 
+    position.Set(posX_,posY_); 
+}
 
 Pos2d* Token::GetPos() { return &position; }

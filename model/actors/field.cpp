@@ -109,22 +109,72 @@ bool Field::ClearTile(Pos2d pos)
 
 bool Field::CheckAllianceLifeness(Allience *allience)
 {
+    int breatheCounter = 0;
+    QVector<Tile*>& lTokens = allience->GetTokens();
+    for(int tokid=0;tokid<lTokens.size();tokid++) {
+        if(CheckTokenLifenessByTile(lTokens[tokid]))
+            breatheCounter++;
+    }
+    allience->SetBreathe(breatheCounter);
+    if(breatheCounter > 0) return true;
+    else return false;
+}
 
+bool Field::CheckTokenLifenessByTile(Tile* tile)
+{
+    Pos2d maxModifier,minModifier;
+    if(p->x == 0) {
+        minModifier.Set(1,0);
+        maxModifier.Set(0,0);
+    } else if(p->y == 0) {
+        minModifier.Set(0,1);
+        maxModifier.Set(0,0);
+    } else if(p->x == 0 && p->y == 0) {
+        minModifier.Set(1,1);
+        maxModifier.Set(0,0);
+    } else if(p->x == tileMatrix.size()-1) {
+        minModifier.Set(0,0);
+        maxModifier.Set(-1,0);
+    } else if(p->y == tileMatrix[0].size()-1) {
+        minModifier.Set(0,0);
+        maxModifier.Set(0,-1);
+    } else if(p->x == tileMatrix.size() && p->y == tileMatrix[0].size()) {
+        minModifier.Set(0,0);
+        maxModifier.Set(-1,-1);
+    } else {
+        minModifier.Set(0,0);
+        maxModifier.Set(0,0);
+    }
+    
+    for(int xadj=-1+minModifier.x;xadj<2+maxModifier.x;xadj++) {
+        for(int yadj=-1+minModifier.y;yadj<2+maxModifier.y;yadj++) {
+            if(tileMatrix[p->x+xadj][p->y+yadj]->GetToken() == nullptr) 
+                return true;     
+        }
+    }
+    return false;
 }
 
 bool Field::ClearAllience(Allience *allience)
 {
-
+    QVector<Tile*>& lTokens = allience->GetTokens();
+    for(int tokid=0;tokid<lTokens.size();tokid++) {
+        lTokens->SetToken(nullptr);
+    }
 }
 
-Allience* Field::GetClosestAllience(Pos2d pos)
+Allience* Field::CheckAllienceCloseBy(Pos2d pos, uint64_t playerId)
 {
-
+    for(int alid=0;alid<ldAlliences.size();alid++) {
+        if(
+    }
 }
 
 void Field::RecalcAlliencesBreathe()
 {
-
+    for(int alid=0;alid<ldAlliences.size();alid++) {
+        this->CheckAllianceLifeness(ldAlliences[alid]);
+    }
 }
 
 void Field::_InitTileMatrix()

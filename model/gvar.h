@@ -31,6 +31,21 @@ namespace Model {
             if(!this->_Equals(other)) return true;
             else return false;
         }
+        
+        uint64_t CalcDistance(Pos2d pos) {
+            uint64_t res;
+            if(pos.x > x)
+                res += (pos.x-x);
+            else if(pos.x < x)
+                res += (x-pos.x);
+             // else  nothing
+            if(pos.y > y) 
+                res += (pos.y-y);
+            else 
+                res += (y-pos.y);
+            
+            return res;
+        }
 
     private:
         bool _Equals(const Pos2d & other)
