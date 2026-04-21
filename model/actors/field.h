@@ -43,7 +43,7 @@ namespace Model {
 
         // // analyse methods
         // get closest allience to position
-        Allience* CheckAllienceCloseBy(Pos2d pos,uint64_t playerId);
+        QVector<Allience*> CheckAlliencesCloseBy(Pos2d pos);
         // recalculate all alliences breathe points
         void RecalcAlliencesBreathe();
     private:
@@ -53,6 +53,10 @@ namespace Model {
 
         //
         bool _PosIsValid(Pos2d pos);
+
+        // find allience for token and set it
+        void _AllocateTokenToAllience(Tile * ocupiedTile);
+
     };
 
 }

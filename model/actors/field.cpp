@@ -49,7 +49,7 @@ bool Field::PlaceToken(Token *token, Pos2d pos)
             token->SetPos(currTile->GetPos());
         }
 
-        Allience * closestAllience = this->GetClosestAllience(pos);
+        Allience * closestAllience = nullptr;//this->GetClosestAllience(pos);
         if(closestAllience == nullptr) {
             // create first allience
         } else {
@@ -59,6 +59,8 @@ bool Field::PlaceToken(Token *token, Pos2d pos)
         this->_CheckAlliencesStructure();
         this->RecalcAlliencesBreathe();
     } catch(const char* err) { if(IsDebuging_) Log(err);  return false; }
+
+    return true;
 }
 
 bool Field::UnplaceToken(Token *token)
@@ -87,6 +89,8 @@ bool Field::UnplaceToken(Token *token)
             }
         }
     } catch(const char * err) { if(IsDebuging_) Log(err);  return false; }
+
+    return true;
 }
 
 bool Field::ClearTile(Pos2d pos)
@@ -105,6 +109,8 @@ bool Field::ClearTile(Pos2d pos)
         this->_CheckAlliencesStructure();
         this->RecalcAlliencesBreathe();
     } catch(const char * err) { if(IsDebuging_) Log(err);  return false; }
+
+    return true;
 }
 
 bool Field::CheckAllianceLifeness(Allience *allience)
@@ -123,6 +129,7 @@ bool Field::CheckAllianceLifeness(Allience *allience)
 bool Field::CheckTokenLifenessByTile(Tile* tile)
 {
     Pos2d maxModifier,minModifier;
+    Pos2d * p = tile->GetPos();
     if(p->x == 0) {
         minModifier.Set(1,0);
         maxModifier.Set(0,0);
@@ -157,17 +164,24 @@ bool Field::CheckTokenLifenessByTile(Tile* tile)
 
 bool Field::ClearAllience(Allience *allience)
 {
+    if(allience == nullptr) return false;
     QVector<Tile*>& lTokens = allience->GetTokens();
     for(int tokid=0;tokid<lTokens.size();tokid++) {
-        lTokens->SetToken(nullptr);
+        lTokens[tokid]->SetToken(nullptr);
     }
+
+    return true;
 }
 
-Allience* Field::CheckAllienceCloseBy(Pos2d pos, uint64_t playerId)
+QVector<Allience*> Field::CheckAlliencesCloseBy(Pos2d pos)
 {
+    QVector<Allience*> res;
     for(int alid=0;alid<ldAlliences.size();alid++) {
-        if(
+        if(ldAlliences[alid]->PosIsNearby(pos)) {
+            res.push_back(ldAlliences[alid]);
+        }
     }
+    return res;
 }
 
 void Field::RecalcAlliencesBreathe()
@@ -189,7 +203,8 @@ void Field::_InitTileMatrix()
 
 void Field::_CheckAlliencesStructure()
 {
-
+    // go for all liences
+    // //
 }
 
 bool Field::_PosIsValid(Pos2d pos)
