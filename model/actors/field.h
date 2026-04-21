@@ -40,6 +40,10 @@ namespace Model {
         bool CheckTokenLifenessByTile(Tile* tile); 
         // unplace all allience-related tokens
         bool ClearAllience(Allience* allience);
+        // check if alliences broke or combined 
+        // нахуй не надо - т.к. обьеденинеия разрушаются сразу полностью
+        // а обрастают токенами потихоньку, на стадии установки, где все чеки и происходють
+        void CheckAlliencesStructure();
 
         // // analyse methods
         // get closest allience to position
@@ -48,14 +52,15 @@ namespace Model {
         void RecalcAlliencesBreathe();
     private:
         void _InitTileMatrix();
-        // check if alliences broke or combined
-        void _CheckAlliencesStructure();
+        
+        //check single allience - is it broke,
+        void _CheckAllienceStructure(Allience* allience);
 
         //
         bool _PosIsValid(Pos2d pos);
 
         // find allience for token and set it
-        void _AllocateTokenToAllience(Tile * ocupiedTile);
+        void _AllocateTokenToAllience(Tile * ocupiedTile); 
 
     };
 
