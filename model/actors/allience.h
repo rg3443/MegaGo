@@ -16,6 +16,8 @@ namespace Model {
 
         void SetBreathe(uint64_t breathePoints_);
         
+        // todo: token managment
+        
         bool PosIsNearby(Pos2d pos);
 
         QVector<Tile*>& GetTokens();
