@@ -216,3 +216,31 @@ bool Field::_PosIsValid(Pos2d pos)
 
     return true;
 }
+
+void Field::_AllocateTokenToAllience(Tile * ocupiedTile)
+{
+    try {
+        if(ocupiedTile == nullptr)
+            throw "";
+        if(ocupiedTile->GetToken() == nullptr)
+            throw "tile is empty";
+        QVector<Allience*> closeByAlliences;
+        // search closest allience
+        for(int alid=0;alid<ldAlliences.size();alid++) {
+            if(ldAlliences[alid]->PosIsNearby(ocucpiedTile->GetPos())) {
+                closeByAlliences.push_back(ldAlliences[alid]);
+            }
+        }
+        // if there is 2 close by allience -> combine'em
+        if(closeByAlliences.size() == 1) { // just add to found allience
+            closeByAlliences[0]->GetTokens().push_back(ocupiedTile->GetToken());
+        } else if(closeByAlliences.size() == 0) { // create new allience
+            ldAlliences.push_back(new Allience(ocupiedTile,1,this));
+        } else { // it is 'bridge' between some alliences
+
+        }
+
+        this->_CheckAlliencesStructure();
+        this->RecalcAlliencesBreathe();
+    } catch(const char* err) { if(IsDebuging_) Log(err); return; }
+}
