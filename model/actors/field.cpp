@@ -14,6 +14,20 @@ Field::Field(uint64_t sizeX_, uint64_t sizeY_, uint8_t type_, QObject * parent)
 Field::~Field()
 {
     if(IsDebuging_) Log("It is field");
+
+    for(int xid=0;xid<tileMatrix.size();xid++) {
+        if(tileMatrix.size() > 0)
+        for(int yid=0;yid<tileMatrix[0].size();yid++) {
+            delete tileMatrix[xid][yid];
+        }
+    }
+
+    for(int alid=0;alid<ldAlliences.size();alid++) {
+        delete ldAlliences[alid];
+    }
+    for(int dalid=0;dalid<ldDestroyedAlliences.size();dalid++) {
+        delete ldDestroyedAlliences[dalid];
+    }
 }
 
 Tile* Field::GetTile(uint64_t posX_, uint64_t posY_)
@@ -196,8 +210,21 @@ void Field::ClearEmptyAlliences()
 void Field::RecalcAlliencesBreathe()
 {
     for(int alid=0;alid<ldAlliences.size();alid++) {
-        this->CheckAllianceLifeness(ldAlliences[alid]);
+        if(!this->CheckAllianceLifeness(ldAlliences[alid])) {
+
+        }
     }
+}
+
+QVector<Allience*> Field::GetDestroyedAlliences()
+{
+    QVector<Allience*> res = lRecentDestroyedAlliences;
+    for(int alid=0;alid<lRecentDestroyedAlliences.size();alid++) {
+        res.push_back(lRecentDestroyedAlliences[alid]);
+        ldDestroyedAlliences.push_back(lRecentDestroyedAlliences[alid]);
+    }
+    lRecentDestroyedAlliences.clear();
+    return res;
 }
 
 void Field::_InitTileMatrix()

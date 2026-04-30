@@ -17,6 +17,8 @@ namespace Model {
     private:
         QVector<QVector<Tile*>> tileMatrix;
         QVector<Allience*> ldAlliences;
+        QVector<Allience*> lRecentDestroyedAlliences; // all alliences who was captured sent here until method GetDestroyedAlliences called
+        QVector<Allience*> ldDestroyedAlliences;      // than the move here to be deleted in desctructor
 
         uint64_t sizeX, sizeY;
         uint8_t type;
@@ -48,6 +50,9 @@ namespace Model {
         void ClearEmptyAlliences();
         // recalculate all alliences breathe points
         void RecalcAlliencesBreathe();
+
+        // get recent destroyed alliences and
+        QVector<Allience*> GetDestroyedAlliences();
     private:
         void _InitTileMatrix();
 
