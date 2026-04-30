@@ -56,7 +56,7 @@ bool Field::PlaceToken(Token *token, Pos2d pos)
             this->CheckAllianceLifeness(closestAllience);
 
         } else {
-            closestAllience->GetTokens().push_back(currTile);
+            closestAllience->GetTokens()->push_back(currTile);
         }
 
         this->RecalcAlliencesBreathe();
@@ -116,9 +116,9 @@ bool Field::ClearTile(Pos2d pos)
 bool Field::CheckAllianceLifeness(Allience *allience)
 {
     int breatheCounter = 0;
-    QVector<Tile*>& lTokens = allience->GetTokens();
-    for(int tokid=0;tokid<lTokens.size();tokid++) {
-        if(CheckTokenLifenessByTile(lTokens[tokid]))
+    QVector<Tile*>* lTokens = allience->GetTokens();
+    for(int tokid=0;tokid<lTokens->size();tokid++) {
+        if(CheckTokenLifenessByTile((*lTokens)[tokid]))
             breatheCounter++;
     }
     allience->SetBreathe(breatheCounter);
@@ -166,9 +166,9 @@ bool Field::CheckTokenLifenessByTile(Tile* tile)
 bool Field::ClearAllience(Allience *allience)
 {
     if(allience == nullptr) return false;
-    QVector<Tile*>& lTokens = allience->GetTokens();
-    for(int tokid=0;tokid<lTokens.size();tokid++) {
-        lTokens[tokid]->SetToken(nullptr);
+    QVector<Tile*> * lTokens = allience->GetTokens();
+    for(int tokid=0;tokid<lTokens->size();tokid++) {
+        (*lTokens)[tokid]->SetToken(nullptr);
     }
 
     return true;
@@ -184,6 +184,13 @@ QVector<Allience*> Field::CheckAlliencesCloseBy(Pos2d pos)
     }
 
     return res;
+}
+
+void Field::ClearEmptyAlliences()
+{
+    for(int alid=0;alid<ldAlliences.size();alid++) {
+        if(ldAlliences[alid]->GetTokens()->size() == 0) ldAlliences.erase(ldAlliences.begin()+alid);
+    }
 }
 
 void Field::RecalcAlliencesBreathe()
@@ -227,20 +234,19 @@ void Field::_AllocateTokenToAllience(Tile * ocupiedTile)
         QVector<Allience*> closeByAlliences;
         // search closest allience
         for(int alid=0;alid<ldAlliences.size();alid++) {
-            if(ldAlliences[alid]->PosIsNearby(ocucpiedTile->GetPos())) {
+            if(ldAlliences[alid]->PosIsNearby(*ocupiedTile->GetPos())) {
                 closeByAlliences.push_back(ldAlliences[alid]);
             }
         }
         // if there is 2 close by allience -> combine'em
         if(closeByAlliences.size() == 1) { // just add to found allience
-            closeByAlliences[0]->GetTokens().push_back(ocupiedTile->GetToken());
+            closeByAlliences[0]->GetTokens()->push_back(ocupiedTile);
         } else if(closeByAlliences.size() == 0) { // create new allience
             ldAlliences.push_back(new Allience(ocupiedTile,1,this));
         } else { // it is 'bridge' between some alliences
 
         }
 
-        this->_CheckAlliencesStructure();
         this->RecalcAlliencesBreathe();
     } catch(const char* err) { if(IsDebuging_) Log(err); return; }
 }

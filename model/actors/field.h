@@ -44,6 +44,8 @@ namespace Model {
         // // analyse methods
         // get closest allience to position
         QVector<Allience*> CheckAlliencesCloseBy(Pos2d pos);
+        //
+        void ClearEmptyAlliences();
         // recalculate all alliences breathe points
         void RecalcAlliencesBreathe();
     private:

@@ -20,7 +20,7 @@ namespace Model {
         
         bool PosIsNearby(Pos2d pos);
 
-        QVector<Tile*>& GetTokens();
+        QVector<Tile*>* GetTokens();
         uint64_t        GetBreathe();
 
     };
