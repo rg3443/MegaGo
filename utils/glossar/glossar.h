@@ -7,16 +7,6 @@
 #include <typeinfo>
 #include <typeindex>
 
-template<class T>
-GlossarRecord CreateGRecord(T object)
-{
-    GlossarRecord newRecord;
-    newRecord.pointerTracker = new * T;
-    *newRecord.pointerTracker = new T(object);
-    return newRecord;
-}
-
-
 namespace KrendUtils {
     struct GlossarRecord {
         void ** pointerTracker;
@@ -39,6 +29,15 @@ namespace KrendUtils {
             }
         }
     };
+
+    template<class T>
+    GlossarRecord CreateGRecord(T object)
+    {
+        GlossarRecord newRecord;
+        newRecord.pointerTracker = new T*;
+        *newRecord.pointerTracker = new T(object);
+        return newRecord;
+    }
 
     class Glossar {
     private:

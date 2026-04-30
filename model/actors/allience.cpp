@@ -14,6 +14,11 @@ Allience::~Allience()
     if(IsDebuging_) Log("It is allience");
 }
 
+void Allience::SetBreathe(uint64_t breathePoints_)
+{
+    breathePoints = breathePoints_;
+}
+
 bool Allience::PosIsNearby(Pos2d pos)
 {
     for(int tokid=0;tokid<lTokens.size();tokid++) {

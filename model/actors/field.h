@@ -37,7 +37,7 @@ namespace Model {
         // check if allience is alive
         bool CheckAllianceLifeness(Allience* allience);
         // check if token is alive
-        bool CheckTokenLifenessByTile(Tile* tile); 
+        bool CheckTokenLifenessByTile(Tile* tile);
         // unplace all allience-related tokens
         bool ClearAllience(Allience* allience);
 
@@ -48,8 +48,6 @@ namespace Model {
         void RecalcAlliencesBreathe();
     private:
         void _InitTileMatrix();
-        // check if alliences broke or combined
-        void _CheckAlliencesStructure();
 
         //
         bool _PosIsValid(Pos2d pos);

@@ -19,6 +19,7 @@ namespace Model {
         uint16_t maxPlayersAmmount;
         uint8_t currentPlayerTurnIndex;
         QVector<Player*> ldPlayers;
+        int points;
     public:
         Team(QObject * parent = nullptr);
         ~Team();
@@ -29,6 +30,8 @@ namespace Model {
         void AssignClient(uint64_t clientId);
         // delete player object via clientId
         bool DeletePlayer(uint64_t clientId);
+        //
+        void SetPoints(int points_) { points = points_; }
 
         // turn
         Player* GetCurrentTurnPlayer();
@@ -38,6 +41,7 @@ namespace Model {
         uint16_t GetMaxPlayers() { return maxPlayersAmmount; }
         Player* GetPlayer(uint64_t clientId);
         Player* GetPlayer(unsigned long int playerId);
+        int GetPoints() { return points; }
     };
 }
 }

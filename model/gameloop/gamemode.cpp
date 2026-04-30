@@ -86,7 +86,7 @@ bool GameMode::PassTurn(Player * player)
             // tick current team
             if(!ldTeams[currentTeamTurnIndex]->TurnMade(player->GetId()))
                 throw "No such player in team";
-            _CycleTurnInde();
+            _CycleTurnIndex();
     } catch(const char * err ) { if(IsDebuging_) Log(err); return false; }
 
     return true;

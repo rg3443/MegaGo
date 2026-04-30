@@ -52,11 +52,13 @@ bool Field::PlaceToken(Token *token, Pos2d pos)
         Allience * closestAllience = nullptr;//this->GetClosestAllience(pos);
         if(closestAllience == nullptr) {
             // create first allience
+            closestAllience = new Allience(currTile,1,this);
+            this->CheckAllianceLifeness(closestAllience);
+
         } else {
             closestAllience->GetTokens().push_back(currTile);
         }
 
-        this->_CheckAlliencesStructure();
         this->RecalcAlliencesBreathe();
     } catch(const char* err) { if(IsDebuging_) Log(err);  return false; }
 
@@ -83,7 +85,6 @@ bool Field::UnplaceToken(Token *token)
                     // clear token pos
                     token->SetPos(-1,-1);
 
-                    this->_CheckAlliencesStructure();
                     this->RecalcAlliencesBreathe();
                 }
             }
@@ -106,7 +107,6 @@ bool Field::ClearTile(Pos2d pos)
         token->SetPos(-1,-1);
         tileMatrix[pos.x][pos.y]->SetToken(nullptr);
 
-        this->_CheckAlliencesStructure();
         this->RecalcAlliencesBreathe();
     } catch(const char * err) { if(IsDebuging_) Log(err);  return false; }
 
@@ -122,6 +122,7 @@ bool Field::CheckAllianceLifeness(Allience *allience)
             breatheCounter++;
     }
     allience->SetBreathe(breatheCounter);
+
     if(breatheCounter > 0) return true;
     else return false;
 }
@@ -181,6 +182,7 @@ QVector<Allience*> Field::CheckAlliencesCloseBy(Pos2d pos)
             res.push_back(ldAlliences[alid]);
         }
     }
+
     return res;
 }
 
@@ -201,12 +203,6 @@ void Field::_InitTileMatrix()
     }
 }
 
-void Field::_CheckAlliencesStructure()
-{
-    // go for all liences
-    // //
-}
-
 bool Field::_PosIsValid(Pos2d pos)
 {
     try {
@@ -216,6 +212,7 @@ bool Field::_PosIsValid(Pos2d pos)
             throw "Field::GetTile: big x err";
         else if(pos.y > tileMatrix.first().size())
             throw "Field::GetTile: big y err";
-        return true;
     } catch(const char* err) { if(IsDebuging_) Log(err); return false; }
+
+    return true;
 }

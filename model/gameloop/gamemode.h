@@ -24,6 +24,8 @@ namespace Model {
         uint8_t currentTeamTurnIndex;
         Field * field;
         QVector<Team*> ldTeams;
+
+        QVector<QMap<QVector<Pos2d>,Team*>> lCapturedTerritories;
     public:
         GameMode(QObject * parent = nullptr);
         ~GameMode();
@@ -37,6 +39,7 @@ namespace Model {
         bool TurnOn(uint64_t firstTurnTeamId = 0);
         bool PlaceToken(Player* player, Pos2d pos);
         bool PassTurn(Player* player);
+        bool CalculatePoints();
 
         // pointer getters
         Field * GetField_P() { return field; }
