@@ -28,9 +28,9 @@ bool Allience::PosIsNearby(Pos2d pos)
     return false;
 }
 
-QVector<Tile*> & Allience::GetTokens()
+QVector<Tile*> * Allience::GetTokens()
 {
-    return lTokens;
+    return &lTokens;
 }
 
 uint64_t Allience::GetBreathe()
