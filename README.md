@@ -1,2 +1,2 @@
 # MegaGo
-Advanced chineese game GO
+Model for advanced chineese game GO
