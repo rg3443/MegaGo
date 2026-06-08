@@ -14,6 +14,7 @@ namespace Model {
     };
 
     class ClientAccount : public ModelObject {
+        Q_OBJECT
     private:
         QString
         login,
@@ -25,8 +26,10 @@ namespace Model {
     public:
         ClientAccount();
         ~ClientAccount() {}
+        ClientAccount(ClientAccount & other);
 
         void Set(QString login_,QString password_,QString nickname_, int avatarImgId_);
+        void SetStats(ClientStatistic stats) { statistics = stats; }
 
         QString GetLogin() { return login; }
         QString GetPassword() { return password; }

@@ -10,6 +10,15 @@ ClientAccount::ClientAccount()
     nickname = "default_nickname";
 }
 
+ClientAccount::ClientAccount(ClientAccount & other)
+{
+    login = other.GetLogin();
+    password = other.GetPassword();
+    nickname = other.GetNickname();
+    avatarImgId = other.GetAvatarId();
+    statistics = *other.GetStatistics_P();
+}
+
 void ClientAccount::Set(QString login_, QString password_, QString nickname_, int avatarImgId_)
 {
     if(login_ != NULL) login = login_;
